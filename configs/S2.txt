@@ -1,0 +1,19 @@
+hostname Switch
+
+spanning-tree mode pvst
+spanning-tree extend system-id
+
+interface range FastEthernet0/1 - 8
+ switchport access vlan 10
+ switchport mode access
+
+interface range FastEthernet0/9 - 16
+ switchport access vlan 20
+ switchport mode access
+
+interface range FastEthernet0/17 - 24
+ switchport access vlan 30
+ switchport mode access
+
+interface GigabitEthernet0/2
+ switchport mode trunk
