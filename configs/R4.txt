@@ -1,0 +1,23 @@
+hostname Router
+
+interface GigabitEthernet0/0
+ ip address 30.30.30.30 255.255.255.252
+ ip helper-address 7.7.7.7
+ duplex auto
+ speed auto
+
+interface GigabitEthernet1/0
+ ip address 40.40.40.42 255.255.255.252
+ ip helper-address 7.7.7.7
+ duplex auto
+ speed auto
+
+interface GigabitEthernet4/0
+ ip address 7.7.7.1 255.255.255.240
+ duplex auto
+ speed auto
+
+router ospf 10
+ network 7.7.7.0 0.0.0.15 area 0
+ network 40.40.40.40 0.0.0.3 area 0
+ network 30.30.30.28 0.0.0.3 area 0
