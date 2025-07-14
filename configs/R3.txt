@@ -1,0 +1,53 @@
+hostname Router
+
+interface GigabitEthernet0/0
+ ip address 10.10.10.9 255.255.255.252
+ ip helper-address 7.7.7.7
+ ip access-group 111 out
+ duplex auto
+ speed auto
+
+interface GigabitEthernet1/0
+ ip address 40.40.40.41 255.255.255.252
+ ip helper-address 7.7.7.7
+ ip access-group 111 out
+ duplex auto
+ speed auto
+
+interface GigabitEthernet2/0
+ no ip address
+ ip helper-address 7.7.7.7
+ duplex auto
+ speed auto
+
+interface GigabitEthernet2/0.10
+ encapsulation dot1Q 10
+ ip address 10.10.0.1 255.255.255.0
+ ip helper-address 7.7.7.7
+
+interface GigabitEthernet2/0.20
+ encapsulation dot1Q 20
+ ip address 10.20.0.1 255.255.255.0
+ ip helper-address 7.7.7.7
+
+interface GigabitEthernet2/0.30
+ encapsulation dot1Q 30
+ ip address 10.30.0.1 255.255.255.0
+ ip helper-address 7.7.7.7
+
+router ospf 10
+ network 10.10.10.8 0.0.0.3 area 0
+ network 40.40.40.40 0.0.0.3 area 0
+ network 10.10.0.0 0.0.0.255 area 0
+ network 10.20.0.0 0.0.0.255 area 0
+ network 10.30.0.0 0.0.0.255 area 0
+
+access-list 111 permit ip 10.10.0.0 0.0.0.255 172.16.10.0 0.0.0.255
+access-list 111 permit ip 10.10.0.0 0.0.0.255 192.168.10.0 0.0.0.255
+access-list 111 permit ip 10.0.0.0 0.255.255.255 host 7.7.7.7
+access-list 111 permit ip 10.20.0.0 0.0.0.255 172.16.20.0 0.0.0.255
+access-list 111 permit ip 10.20.0.0 0.0.0.255 192.168.20.0 0.0.0.255
+access-list 111 permit ip 10.30.0.0 0.0.0.255 192.168.30.0 0.0.0.255
+access-list 111 permit ip 10.30.0.0 0.0.0.255 172.16.30.0 0.0.0.255
+access-list 111 permit ip 192.168.0.0 0.0.255.255 host 7.7.7.7
+access-list 111 permit ip host 7.7.7.7 192.168.0.0 0.0.255.255
