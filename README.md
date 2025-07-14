@@ -1,4 +1,3 @@
-![Network Topology](topology.png)
 # Cisco Packet Tracer Network Project
 
 ## 📡 Overview
